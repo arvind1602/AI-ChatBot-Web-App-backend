@@ -39,11 +39,11 @@ UserSchema.pre("save", async function (next) {
   next();
 });
 
-UserSchema.method.isPasswordVaild = async function (password) {
+UserSchema.methods.isPasswordValid = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
 
-UserSchema.method.generateAccessToken = function () {
+UserSchema.methods.generateAccessToken = function () {
   return jwt.sign(
     { id: this._id, username: this.username },
     process.env.ACCESS_TOKEN_SECRET,
